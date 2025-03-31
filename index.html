@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>IEEE BINGE</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+        <div class="navbar" id="navbar">
+            <div class="navbar-logo">IEEE BINGE</div>
+
+            <!-- Hamburger icon for mobile -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Navigation menu -->
+            <div class="navbar-menu" id="navbar-menu">
+                <a href="#home" onclick="loadMain()">Home</a>
+                <a href="#tvshows" onclick="loadMain()">TV Shows</a>
+                <a href="#movies" onclick="loadMain()">Movies</a>
+                <a href="#mylist" onclick="loadMain()">My List</a>
+            </div>
+        </div>
+
+        <div id="notification" class="notification"></div>
+
+        <!-- PARENT CONTAINER: This content will swap between main view and details view -->
+        <div id="main-content">
+            
+            <!-- HERO SECTION -->
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h1>Unlimited movies, TV shows, and more.</h1>
+                    <p>Watch anywhere. Watch anytime.</p>
+                </div>
+            </section>
+
+            <!-- TV SHOWS SECTION -->
+            <div class="section" id="tvshows">
+                <h2>Top TV Shows</h2>
+                <div class="row" id="tvshows-row">
+                    <!-- TV Shows injected dynamically -->
+                </div>
+            </div>
+
+            <!-- MOVIES SECTION -->
+            <div class="section" id="movies">
+                <h2>Top Movies in India</h2>
+                <div class="row" id="movies-row">
+                    <!-- Movies injected dynamically -->
+                </div>
+            </div>
+
+            <!-- WATCHLIST SECTION -->
+            <div class="watchlist" id="mylist">
+                
+                <h2>My Watchlist</h2>
+                <div class="watchlist-controls">
+                    <input type="text" id="watchlistInput" placeholder="Add a new movie (Title)" />
+                    <button class="btn" onclick="addMovieManually()">Add Movie</button>
+                    <button class="btn" onclick="clearWatchlist()">Clear All</button>
+                </div>
+                
+                <div class="watchlist-items" id="watchlistItems">
+                <!-- Watchlist items rendered dynamically -->
+                
+            </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>IEEE Binge © 2025. Built with ♥ for getting selected in IEEE JC 2025-26</p>
+        </footer>
+
+        <!-- MODAL (for movie details) -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-body">
+
+                    <img id="modal-poster" src="" alt="Poster">
+
+                    <div class="modal-info">
+                        <h1 id="modal-title"></h1>
+
+                        <div class="metadata">
+                            <span id="modal-year"></span>
+                            <span id="modal-rating"></span>
+                            <span id="modal-genres"></span>
+                        </div>
+
+                        <p id="modal-description"></p>
+                        <div class="modal-buttons">
+                            <button class="btn watch-now" onclick="showDetails()">Watch Now</button>
+                            <button class="btn" id="modal-add-button">Add to Watchlist</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILS VIEW TEMPLATE (hidden, will be injected into main-content) -->
+        <script type="text/template" id="details-template">
+            <section class="details-view">
+                <div class="details-container">
+                    <div class="left-panel">
+
+                        <div class="video-player">
+                            <iframe id="videoPlayer" src="{{videoURL}}" allowfullscreen></iframe>
+                        </div>
+
+                        <div class="movie-info">
+
+                            <h1 id="detail-movieTitle">{{title}}</h1>
+
+                            <div class="metadata">
+                                <span id="detail-movieYear">{{year}}</span>
+                                <span id="detail-movieRating">{{rating}}</span>
+                                <span id="detail-movieGenres">{{genres}}</span>
+                            </div>
+
+                            <p id="detail-movieDescription">{{description}}</p>
+                        </div>
+                    </div>
+
+                    <div class="right-panel">
+                        <h2>Suggestions</h2>
+                        <div class="suggestions" id="details-suggestions">
+                            <!-- Suggestion cards injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        <script src="script.js"></script>
+    </body>
+</html>
