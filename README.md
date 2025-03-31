@@ -2,8 +2,8 @@
   <p>
     IEEE BINGE is a responsive, single-page web application designed for browsing movies and TV shows.
     It features a dynamic watchlist, allowing users to add or remove their favorite movies on the fly.
-    This project is built with HTML, CSS, and JavaScript and was developed as a selection project for one
-    of the most prestigious IEEE chapters at my college.
+    This project is built with HTML, CSS, and JavaScript and was developed as a selection project for 
+    the Chapter IEEE.
   </p>
 
   <h2>Table of Contents</h2>
@@ -70,5 +70,5 @@
 
   <h2 id="acknowledgments">Acknowledgments</h2>
   <p>
-    This project was developed as a selection project for IEEE, one of the most prestigious chapters at my college.
+    This project was developed as a selection project for IEEE.
   </p>
