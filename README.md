@@ -1,3 +1,5 @@
+<a href="https://codethread386.github.io/OTT/">https://codethread386.github.io/OTT/</a> <br>Use this link to see the website
+<br><br>
 <h1>IEEE BINGE</h1>
   <p>
     IEEE BINGE is a responsive, single-page web application designed for browsing movies and TV shows.
