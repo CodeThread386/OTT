@@ -1,76 +1,77 @@
-<a href="https://ott-git-main-sarthak-trivedis-projects.vercel.app/">https://ott-git-main-sarthak-trivedis-projects.vercel.app/</a> <br>Use this link to see the website
-<br>
-<h1>WEB BINGE</h1>
-  <p>
-    WEB BINGE is a responsive, single-page web application designed for browsing movies and TV shows.
-    It features a dynamic watchlist, allowing users to add or remove their favorite movies on the fly.
-    This project is built with HTML, CSS, and JavaScript and was developed as a selection project for 
-    the Chapter IEEE.
-  </p>
+[Live Demo](https://ott-git-main-sarthak-trivedis-projects.vercel.app/)
 
-  <h2>Table of Contents</h2>
-  <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#technologies">Technologies</a></li>
-    <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#project-structure">Project Structure</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ul>
+# WEB BINGE
 
-  <h2 id="overview">Overview</h2>
-  <p>
-    WEB BINGE is crafted to provide an immersive browsing experience through a clean and modern interface.
-    With a fixed background, a stylish navbar, and smooth animations, users can easily navigate between
-    different sections such as TV shows, movies, and their personal watchlist. The app also includes a modal
-    view to display detailed movie information and a separate details view for an enriched user experience.
-  </p>
+WEB BINGE is a responsive React single-page application for browsing **TV shows** and **movies**. It includes a dynamic **watchlist**, a **modal details view**, and a **details page** with an embedded video and suggestions.
 
-  <h2 id="features">Features</h2>
-  <ul>
-    <li><strong>Responsive Design:</strong> Fully responsive layout that adapts to desktops, tablets, and mobile devices.</li>
-    <li><strong>Dynamic Watchlist:</strong> Easily add or remove movies from your watchlist with JavaScript. Movies can be added manually or selected from suggested lists.</li>
-    <li><strong>Modal Details View:</strong> Click on a movie card to view additional details like year, rating, genres, and a brief description in a pop-up modal.</li>
-    <li><strong>Details Page:</strong> Enjoy a YouTube-like details view with an embedded video player, extended movie description, and a suggestion sidebar.</li>
-    <li><strong>Smooth Transitions &amp; Animations:</strong> Enhance user experience with subtle hover effects, modal animations, and smooth scroll transitions.</li>
-    <li><strong>Clean UI/UX:</strong> Minimalist design with a fixed, high-quality background image, ensuring an immersive visual experience.</li>
-  </ul>
+## Features
 
-  <h2 id="technologies">Technologies</h2>
-  <ul>
-    <li><strong>HTML5:</strong> Markup structure for the web page.</li>
-    <li><strong>CSS3:</strong> Styling, animations, and responsive design.</li>
-    <li><strong>JavaScript:</strong> DOM manipulation, event handling, and dynamic watchlist functionality.</li>
-  </ul>
+- Responsive UI (desktop/tablet/mobile) using custom CSS
+- Browse sections: **Top TV Shows** and **Top Movies**
+- Filter by **minimum star rating** (0.0 to 5.0) with numeric input
+- Click any card to open a **modal** with title, year, runtime/director, and an extended description
+- Add/remove/clear items in **My Watchlist** (persisted in `localStorage`)
+- Click **Watch Now** to navigate to the `/details` page
+- `/details` page shows an embedded video, extended description, and a suggestions list
 
-  <h2 id="usage">Usage</h2>
-  <h3>Browsing Movies &amp; TV Shows</h3>
-  <p>
-    Scroll down to view the curated lists for top TV shows and movies.
-  </p>
-  <h3>Watchlist Management</h3>
-  <ul>
-    <li><strong>Add Movie:</strong> Use the input field in the "My Watchlist" section to manually add a movie by its title.
-      If the title matches one from the suggested list, full details will be added.
-    </li>
-    <li><strong>Remove Movie:</strong> Click the "Remove" button on any watchlist card to remove that movie.</li>
-    <li><strong>Clear Watchlist:</strong> Use the "Clear All" button to empty the watchlist.</li>
-  </ul>
-  <h3>Viewing Details</h3>
-  <p>
-    Click on any movie card to open a modal with more information. You can then select "Watch Now" to switch to a detailed view,
-    complete with an embedded video player and further suggestions.
-  </p>
+## Tech Stack
 
-  <h2 id="project-structure">Project Structure</h2>
-  <pre>
-├── index.html         # Main HTML file containing the structure, CSS styles, and JavaScript code
-├── README.md          # Project documentation
-└── (Optional assets)  # Any additional images or resources if needed in the future
-  </pre>
+- React (component-based UI + state handling)
+- React Router DOM (navigation between main page and details page)
+- Vite (build tooling)
+- HTML + CSS (semantic structure + styling/responsiveness)
+- JavaScript (dynamic behavior: filtering, modal, watchlist, persistence)
 
-  <h2 id="acknowledgments">Acknowledgments</h2>
-  <p>
-    This project was developed as a selection project for IEEE.
-  </p>
+## Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Run in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Build the production bundle:
+
+   ```bash
+   npm run build
+   ```
+
+4. (Optional) Preview the production build:
+
+   ```bash
+   npm run preview
+   ```
+
+## Usage
+
+- **Filter**: Set “Minimum stars” (0.0 - 5.0). Cards update instantly.
+- **Add to Watchlist**:
+  - Type a title in **My Watchlist** and click **Add Movie**.
+  - If the title matches an existing item, the full details are added; otherwise a new placeholder entry is created.
+- **Remove/Clear**:
+  - Click **Remove** on a watchlist card.
+  - Click **Clear All** to empty the watchlist.
+- **Details**:
+  - Click a card to open the modal.
+  - Click **Watch Now** to go to the full details page.
+
+## Project Structure
+
+- `index.html` - app root HTML
+- `src/main.jsx` - React bootstrap
+- `src/App.jsx` - routes + watchlist persistence
+- `src/pages/` - `MainPage.jsx`, `DetailsPage.jsx`
+- `src/components/` - `Navbar`, `MovieCard`, `Modal`, `Notification`, etc.
+- `src/data/` - seed media data
+- `src/utils/` - helper functions
+- `src/style.css` - styling
+
+## Acknowledgments
+
+Developed as a selection project for IEEE.
