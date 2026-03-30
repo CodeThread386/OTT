@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import { tvShows, movies, suggestionsData } from '../data/media';
 import MovieCard from '../components/MovieCard';
 import Modal from '../components/Modal';
-import {
-  itemPassesMinRating,
-  buildGenreRows,
-  genreSectionId,
-} from '../utils/catalogHelpers';
+import { itemPassesMinRating } from '../utils/catalogHelpers';
 
 const watchlistEntryShape = PropTypes.shape({
   title: PropTypes.string.isRequired,
@@ -44,10 +40,6 @@ export default function MainPage({
     () => movies.filter((item) => itemPassesMinRating(item, minRating)),
     [minRating]
   );
-  const genreRows = useMemo(() => {
-    const combined = [...filteredTv, ...filteredMovies];
-    return buildGenreRows(combined, 2);
-  }, [filteredTv, filteredMovies]);
 
   useEffect(() => {
     const id = location.hash?.replace('#', '');
@@ -144,17 +136,6 @@ export default function MainPage({
             </div>
           )}
         </div>
-
-        {genreRows.map(([genre, items]) => (
-          <div className="section" id={genreSectionId(genre)} key={genre}>
-            <h2>{genre}</h2>
-            <div className="row">
-              {items.map((item) => (
-                <MovieCard key={`${genre}-${item.title}`} item={item} onOpen={openModal} />
-              ))}
-            </div>
-          </div>
-        ))}
 
         <div className="watchlist" id="mylist">
           <h2>My Watchlist</h2>
