@@ -71,7 +71,3 @@ WEB BINGE is a responsive React single-page application for browsing **TV shows*
 - `src/data/` - seed media data
 - `src/utils/` - helper functions
 - `src/style.css` - styling
-
-## Acknowledgments
-
-Developed as a selection project for IEEE.
