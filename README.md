@@ -1,4 +1,4 @@
-<a href="https://codethread386.github.io/OTT/">https://codethread386.github.io/OTT/</a> <br>Use this link to see the website
+<a href="https://ott-git-main-sarthak-trivedis-projects.vercel.app/">https://ott-git-main-sarthak-trivedis-projects.vercel.app/</a> <br>Use this link to see the website
 <br>
 <h1>WEB BINGE</h1>
   <p>
