@@ -1,8 +1,8 @@
 <a href="https://codethread386.github.io/OTT/">https://codethread386.github.io/OTT/</a> <br>Use this link to see the website
 <br>
-<h1>IEEE BINGE</h1>
+<h1>WEB BINGE</h1>
   <p>
-    IEEE BINGE is a responsive, single-page web application designed for browsing movies and TV shows.
+    WEB BINGE is a responsive, single-page web application designed for browsing movies and TV shows.
     It features a dynamic watchlist, allowing users to add or remove their favorite movies on the fly.
     This project is built with HTML, CSS, and JavaScript and was developed as a selection project for 
     the Chapter IEEE.
@@ -21,7 +21,7 @@
 
   <h2 id="overview">Overview</h2>
   <p>
-    IEEE BINGE is crafted to provide an immersive browsing experience through a clean and modern interface.
+    WEB BINGE is crafted to provide an immersive browsing experience through a clean and modern interface.
     With a fixed background, a stylish navbar, and smooth animations, users can easily navigate between
     different sections such as TV shows, movies, and their personal watchlist. The app also includes a modal
     view to display detailed movie information and a separate details view for an enriched user experience.
