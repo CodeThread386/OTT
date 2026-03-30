@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { tvShows, movies, suggestionsData } from '../data/media';
 import MovieCard from '../components/MovieCard';
 import Modal from '../components/Modal';
+import {
+  itemPassesMinRating,
+  buildGenreRows,
+  genreSectionId,
+} from '../utils/catalogHelpers';
 
 const watchlistEntryShape = PropTypes.shape({
   title: PropTypes.string.isRequired,
@@ -29,6 +34,20 @@ export default function MainPage({
   const [watchlistInput, setWatchlistInput] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
+  const [minRating, setMinRating] = useState(0);
+
+  const filteredTv = useMemo(
+    () => tvShows.filter((item) => itemPassesMinRating(item, minRating)),
+    [minRating]
+  );
+  const filteredMovies = useMemo(
+    () => movies.filter((item) => itemPassesMinRating(item, minRating)),
+    [minRating]
+  );
+  const genreRows = useMemo(() => {
+    const combined = [...filteredTv, ...filteredMovies];
+    return buildGenreRows(combined, 2);
+  }, [filteredTv, filteredMovies]);
 
   useEffect(() => {
     const id = location.hash?.replace('#', '');
@@ -56,12 +75,13 @@ export default function MainPage({
     if (found) {
       addToWatchlist(found);
     } else {
+      const randomRating = `${(5.2 + Math.random() * 3.8).toFixed(1)}/10`;
       addToWatchlist({
         title,
         image: 'https://picsum.photos/220/330?random',
         description: 'User added movie',
         year: 'N/A',
-        rating: 'N/A',
+        rating: randomRating,
         genres: 'N/A',
         runtime: '',
         director: '',
@@ -82,23 +102,59 @@ export default function MainPage({
           </div>
         </section>
 
+        <div className="section rating-filter-section" id="browse">
+          <div className="rating-filter-bar">
+            <label htmlFor="rating-filter">Minimum rating</label>
+            <select
+              id="rating-filter"
+              className="rating-filter-select"
+              value={minRating}
+              onChange={(e) => setMinRating(Number(e.target.value))}
+            >
+              <option value={0}>All ratings</option>
+              <option value={6}>6+ / 10</option>
+              <option value={7}>7+ / 10</option>
+              <option value={8}>8+ / 10</option>
+            </select>
+          </div>
+        </div>
+
         <div className="section" id="tvshows">
           <h2>Top TV Shows</h2>
-          <div className="row" id="tvshows-row">
-            {tvShows.map((item) => (
-              <MovieCard key={item.title} item={item} onOpen={openModal} />
-            ))}
-          </div>
+          {filteredTv.length === 0 ? (
+            <p className="row-empty">No TV shows match this rating filter.</p>
+          ) : (
+            <div className="row" id="tvshows-row">
+              {filteredTv.map((item) => (
+                <MovieCard key={item.title} item={item} onOpen={openModal} />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="section" id="movies">
           <h2>Top Movies in India</h2>
-          <div className="row" id="movies-row">
-            {movies.map((item) => (
-              <MovieCard key={item.title} item={item} onOpen={openModal} />
-            ))}
-          </div>
+          {filteredMovies.length === 0 ? (
+            <p className="row-empty">No movies match this rating filter.</p>
+          ) : (
+            <div className="row" id="movies-row">
+              {filteredMovies.map((item) => (
+                <MovieCard key={item.title} item={item} onOpen={openModal} />
+              ))}
+            </div>
+          )}
         </div>
+
+        {genreRows.map(([genre, items]) => (
+          <div className="section" id={genreSectionId(genre)} key={genre}>
+            <h2>{genre}</h2>
+            <div className="row">
+              {items.map((item) => (
+                <MovieCard key={`${genre}-${item.title}`} item={item} onOpen={openModal} />
+              ))}
+            </div>
+          </div>
+        ))}
 
         <div className="watchlist" id="mylist">
           <h2>My Watchlist</h2>
