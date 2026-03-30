@@ -1,18 +1,4 @@
-import PropTypes from 'prop-types';
 import { buildModalDescription } from '../utils/mediaHelpers';
-
-const mediaItemShape = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-  genres: PropTypes.string.isRequired,
-  videoURL: PropTypes.string.isRequired,
-  bigDes: PropTypes.string,
-  runtime: PropTypes.string,
-  director: PropTypes.string,
-});
 
 export default function Modal({ item, open, onClose, onWatchNow, onAddToWatchlist }) {
   if (!item) return null;
@@ -45,7 +31,7 @@ export default function Modal({ item, open, onClose, onWatchNow, onAddToWatchlis
             <h1 id="modal-title">{item.title}</h1>
             <div className="metadata">
               <span id="modal-year">{item.year}</span>
-              <span id="modal-rating">{item.rating}</span>
+              <span id="modal-rating">{item.rating.toFixed(1)} stars</span>
               <span id="modal-genres">{item.genres}</span>
             </div>
             <p id="modal-description">{descriptionText}</p>
@@ -71,11 +57,3 @@ export default function Modal({ item, open, onClose, onWatchNow, onAddToWatchlis
     </div>
   );
 }
-
-Modal.propTypes = {
-  item: mediaItemShape,
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onWatchNow: PropTypes.func.isRequired,
-  onAddToWatchlist: PropTypes.func.isRequired,
-};

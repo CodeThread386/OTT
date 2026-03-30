@@ -1,23 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { tvShows, movies, suggestionsData } from '../data/media';
 import MovieCard from '../components/MovieCard';
 import Modal from '../components/Modal';
 import { itemPassesMinRating } from '../utils/catalogHelpers';
-
-const watchlistEntryShape = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-  genres: PropTypes.string.isRequired,
-  videoURL: PropTypes.string.isRequired,
-  bigDes: PropTypes.string,
-  runtime: PropTypes.string,
-  director: PropTypes.string,
-});
 
 export default function MainPage({
   watchlist,
@@ -31,6 +17,7 @@ export default function MainPage({
   const [modalOpen, setModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [minRating, setMinRating] = useState(0);
+  const [minRatingInput, setMinRatingInput] = useState('');
 
   const filteredTv = useMemo(
     () => tvShows.filter((item) => itemPassesMinRating(item, minRating)),
@@ -67,7 +54,8 @@ export default function MainPage({
     if (found) {
       addToWatchlist(found);
     } else {
-      const randomRating = `${(5.2 + Math.random() * 3.8).toFixed(1)}/10`;
+      // Convert the previous 0-10 style number to 0-5 stars, rounded to 1 decimal.
+      const randomRating = Number((2.6 + Math.random() * 1.9).toFixed(1));
       addToWatchlist({
         title,
         image: 'https://picsum.photos/220/330?random',
@@ -96,18 +84,32 @@ export default function MainPage({
 
         <div className="section rating-filter-section" id="browse">
           <div className="rating-filter-bar">
-            <label htmlFor="rating-filter">Minimum rating</label>
-            <select
+            <label htmlFor="rating-filter">Minimum stars</label>
+            <input
               id="rating-filter"
+              value={minRatingInput}
               className="rating-filter-select"
-              value={minRating}
-              onChange={(e) => setMinRating(Number(e.target.value))}
-            >
-              <option value={0}>All ratings</option>
-              <option value={6}>6+ / 10</option>
-              <option value={7}>7+ / 10</option>
-              <option value={8}>8+ / 10</option>
-            </select>
+              type="number"
+              min={0}
+              max={5}
+              step={0.1}
+              placeholder="0.0 - 5.0"
+              onChange={(e) => {
+                const v = e.target.value;
+                setMinRatingInput(v);
+                // Keep filtering numeric, but allow the input field to be empty.
+                setMinRating(v === '' ? 0 : Number(v));
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  e.currentTarget.blur();
+                }
+              }}
+              onBlur={() => {
+                if (minRatingInput === '') setMinRating(0);
+              }}
+            />
           </div>
         </div>
 
@@ -229,10 +231,3 @@ export default function MainPage({
     </>
   );
 }
-
-MainPage.propTypes = {
-  watchlist: PropTypes.arrayOf(watchlistEntryShape).isRequired,
-  addToWatchlist: PropTypes.func.isRequired,
-  removeFromWatchlist: PropTypes.func.isRequired,
-  clearWatchlist: PropTypes.func.isRequired,
-};

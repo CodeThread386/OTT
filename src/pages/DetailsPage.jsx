@@ -1,6 +1,5 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { suggestionsData } from '../data/media';
 import { buildModalDescription } from '../utils/mediaHelpers';
 
@@ -23,24 +22,6 @@ function SuggestionCard({ item, onSelect }) {
     </div>
   );
 }
-
-const mediaShape = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-  genres: PropTypes.string.isRequired,
-  videoURL: PropTypes.string.isRequired,
-  bigDes: PropTypes.string,
-  runtime: PropTypes.string,
-  director: PropTypes.string,
-});
-
-SuggestionCard.propTypes = {
-  item: mediaShape.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};
 
 export default function DetailsPage() {
   const location = useLocation();
@@ -94,7 +75,7 @@ export default function DetailsPage() {
               <h1 id="detail-movieTitle">{item.title}</h1>
               <div className="metadata">
                 <span id="detail-movieYear">{item.year}</span>
-                <span id="detail-movieRating">{item.rating}</span>
+                <span id="detail-movieRating">{item.rating.toFixed(1)} stars</span>
                 <span id="detail-movieGenres">{item.genres}</span>
               </div>
               <p id="detail-movieDescription">{bodyText}</p>

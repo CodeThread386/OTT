@@ -1,18 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-
-const mediaItemShape = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-  genres: PropTypes.string.isRequired,
-  videoURL: PropTypes.string.isRequired,
-  bigDes: PropTypes.string,
-  runtime: PropTypes.string,
-  director: PropTypes.string,
-});
 
 function previewText(item) {
   const long = item.bigDes || item.description || '';
@@ -47,7 +33,9 @@ export default function MovieCard({ item, onOpen }) {
       <div className="movie-card-media">
         <img src={item.image} alt={item.title} />
         <div className="movie-card-preview" aria-hidden={!hover}>
-          <span className="movie-card-preview-rating">{item.rating}</span>
+          <span className="movie-card-preview-rating">
+            {item.rating.toFixed(1)} stars
+          </span>
           <span className="movie-card-preview-genres">{item.genres}</span>
           <p className="movie-card-preview-text">{previewText(item)}</p>
         </div>
@@ -59,8 +47,3 @@ export default function MovieCard({ item, onOpen }) {
     </div>
   );
 }
-
-MovieCard.propTypes = {
-  item: mediaItemShape.isRequired,
-  onOpen: PropTypes.func.isRequired,
-};

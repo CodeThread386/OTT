@@ -84,7 +84,7 @@ export default function App() {
         <Route path="/details" element={<DetailsPage />} />
       </Routes>
       <footer>
-        <p>WEB BINGE © 2025. Built with ♥ for Web Programming Lab Project</p>
+        <p>WEB BINGE © 2026. Built with ♥ for Web Programming Lab Project</p>
       </footer>
     </BrowserRouter>
   );
